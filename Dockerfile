@@ -1,9 +1,7 @@
 #
 # HTTPbin over HTTP/2 Dockerfile
 #
-
-# TODO: Pin to LTS (24.04)
-FROM ubuntu:18.04 
+FROM ubuntu:24.04
 
 ENV DEBIAN_FRONTEND noninteractive
 
