@@ -27,8 +27,8 @@ Port 8000
 
 How to use it?
 ================
-1. ```docker pull skydoctor/httpbin-http2```
-2. ```docker run -d -p 8000 skydoctor/httpbin-http2```
+1. ```docker build -f Dockerfile -t httpbin:1.0 .```
+2. ```docker run -p 8000:8000 --rm -it httpbin:1.0```
 3. Go to the exposed port in docker for this machine.
 
 
