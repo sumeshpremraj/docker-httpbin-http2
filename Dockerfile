@@ -8,7 +8,14 @@ ENV VENV_PATH=/opt/venv
 ENV PATH="$VENV_PATH/bin:$PATH"
 
 RUN \
-  apt-get update && apt-get install --no-install-recommends build-essential python3.12-venv python3-dev python3-pip python3-setuptools nghttp2 -y && \
+  apt-get update && \
+  apt-get install --no-install-recommends -y \
+    build-essential \
+    python3.12-venv \
+    python3-dev \
+    python3-pip \
+    python3-setuptools \
+    nghttp2 && \
   python3 -m venv $VENV_PATH && \
   $VENV_PATH/bin/pip install --upgrade pip==25.0.01 && \
   $VENV_PATH/bin/pip install gunicorn==23.0.0 httpbin==0.10.2 && \
@@ -17,8 +24,6 @@ RUN \
   echo '#!/bin/sh' > run.sh && \
   echo 'exec gunicorn --bind=127.0.0.1:8001 httpbin:app &' >> run.sh && \
   echo 'exec nghttpx --conf=nghttp2-proxy.conf' >> run.sh && \
-  echo 'wait' >> run.sh && \
-  echo 'kill -s TERM %-' >> run.sh && \
   chmod +x run.sh && \
   apt-get remove --purge build-essential python3-dev -y && \
   apt-get autoremove -y && \
